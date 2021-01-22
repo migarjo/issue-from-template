@@ -91,6 +91,8 @@ func (i *issue) generatePayload() ([]byte, error) {
 	payload.Body = strings.Replace(s[2], "\n", "", 1)
 	payload.Assignees = t.Assignees.splitAndTrimSpace()
 	payload.Labels = t.Labels.splitAndTrimSpace()
+	
+	payload.Assignees = append(payload.Assignees, os.Getenv("NEW_ASSIGNEE"))
 
 	d, err := json.Marshal(payload)
 	if err != nil {
