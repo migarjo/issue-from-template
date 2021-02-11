@@ -40,7 +40,6 @@ func NewIssue() *issue {
 	} else {
 		i.endpoint = "https://api.github.com/repos/" + os.Getenv("GITHUB_REPOSITORY") + "/issues"
 	}
-	fmt.Println(os.Getenv("GITHUB_REPOSITORY_OVERRIDE"))
 	i.template = filepath.Join(os.Getenv("GITHUB_WORKSPACE"), ".github", "ISSUE_TEMPLATE", os.Getenv("IFT_TEMPLATE_NAME"))
 	return i
 }
