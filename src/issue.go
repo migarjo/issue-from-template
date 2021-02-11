@@ -92,7 +92,7 @@ func (i *issue) generatePayload() ([]byte, error) {
 		Labels    []string `json:"labels"`
 	}{}
 
-	payload.Title = t.Title
+	payload.Title = strings.Replace(t.Title, "[GITHUB_HANDLE]", os.Getenv("NEW_ASSIGNEE"), 1)
 	payload.Body = strings.Replace(s[2], "\n", "", 1)
 	payload.Assignees = t.Assignees.splitAndTrimSpace()
 	payload.Labels = t.Labels.splitAndTrimSpace()
