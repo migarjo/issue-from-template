@@ -35,8 +35,12 @@ func NewIssue() *issue {
 		}
 		i.date = NewDate(time.Now().AddDate(0, 0, dates))
 	}
-	i.endpoint = "https://api.github.com/repos/" + os.Getenv("GITHUB_REPOSITORY") + "/issues"
-	fmt.Println(os.Getenv("GITHUB_REPOSITORY"))
+	if os.Getenv("GITHUB_REPOSITORY_OVERRIDE") != "" {
+		i.endpoint = "https://api.github.com/repos/" + os.Getenv("GITHUB_REPOSITORY_OVERRIDE") + "/issues"
+	} else {
+		i.endpoint = "https://api.github.com/repos/" + os.Getenv("GITHUB_REPOSITORY") + "/issues"
+	}
+	fmt.Println(os.Getenv("GITHUB_REPOSITORY_OVERRIDE"))
 	i.template = filepath.Join(os.Getenv("GITHUB_WORKSPACE"), ".github", "ISSUE_TEMPLATE", os.Getenv("IFT_TEMPLATE_NAME"))
 	return i
 }
